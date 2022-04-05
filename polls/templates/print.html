@@ -1,0 +1,19 @@
+{% block content %} 
+<center>
+    <h2>SELECT THE TOPIC</h2>
+    <br>
+    <form action="" method=POST>
+        {% csrf_token %} 
+        {{form.as_p}}
+        <select name="topics">
+        <option selected disabled="true">
+            ---Topics--
+        </option>
+        {% for result in Topic%}
+        <option name="topics">{{result.topic_name}}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="submit" class="btn btn-secondary">
+</form>
+</center>
+{% endblock %}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<head>
+    <style>
+        /* CSS comes here */
+        body {
+            font-family: arial;
+        }
+        button {
+            padding:10px;
+            background-color:#6a67ce;
+            color: #FFFFFF;
+            border: 0px;
+            cursor:pointer;
+            border-radius: 5px;
+        }
+        #output {
+            background-color:#F9F9F9;
+            padding:10px;
+            width: 100%;
+            margin-top:20px;
+            line-height:30px;
+        }
+        .hide {
+            display:none;
+        }
+        .show {
+            display:block;
+        }
+    </style>
+    <title>Answer</title>
+</head>
+<body>
+    <h2>Hey Champ!! Tell Your Answer here with us!!</h2>
+    <p>Click on the below button and speak...</p>
+    <p><button type="button" onclick="runSpeechRecognition()">Speak Out!!</button> &nbsp; <span id="action"></span></p>
+    <p><button type="button" onclick="huggingcompare()">Check your grade</button> &nbsp; <span id="ac"></span></p>
+    <div id="output" class="hide"></div>
+    <script>
+        /* JS comes here */
+        function runSpeechRecognition() {
+        var output = document.getElementById("output");
+        // get action element reference
+        var action = document.getElementById("action");
+        // new speech recognition object
+        var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+        var recognition = new SpeechRecognition();
+    
+        // This runs when the speech recognition service starts
+        recognition.onstart = function() {
+            action.innerHTML = "<small>stopped listening, hope you are done...</small>";
+            recognition.stop();
+        }
+      
+        // This runs when the speech recognition service returns result
+        recognition.onresult = function(event) {
+            var transcript = event.results[0][0].transcript;
+           
+            output.innerHTML = "<b>Text:</b> " + transcript ;
+            output.classList.remove("hide");
+        };
+      
+         // start recognition
+         recognition.start();
+    }
+function huggingcompare() {
+    const spacy = require('spacy');
+    const nlp = spacy.load('en_core_web_sm');
+    let l = len(answers);
+for (let i = 0; i < l; i++) {
+  let doc1=nlp(transcript)
+  let doc2=nlp(answers[i])
+  console.log(doc1.similarity(doc2))
+}
+}
+</script>
+</body>
+</html>
